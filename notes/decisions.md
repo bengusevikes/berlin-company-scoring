@@ -1,12 +1,12 @@
 # Decision log: Berlin startup scoring
 
-A running log of every decision in this project and why I made it. Status: **confirmed** (decided) or **proposed** (still open).
+A running log of every decision in this project and why I made it. 
 
 ---
 
 ## Context: what this project is
 
-A scored target account list of Berlin tech startups, built the way a GTM engineer builds one: clear criteria, sourcing, enrichment, a scoring model and tiers. I used my own criteria for a good employer as the ICP, so every decision is one I can explain from first-hand reasoning.
+A scored target account list of Berlin tech startups, built the way a GTM engineer builds one: clear criteria, sourcing, enrichment, a scoring model and tiers. I used my own criteria for a good employer as the ICP.
 
 The criteria:
 - Based in Berlin
@@ -17,23 +17,23 @@ The criteria:
 
 ---
 
-## D1. Starting criteria (14 Oct 2026) · confirmed
+## D1. Starting criteria
 
 Berlin-based, English-speaking, tech company. Employee size can be anything. Sector: fintech or B2B SaaS, but open to other tech.
 
-## D2. Split criteria into filters and scoring (14 Oct 2026) · confirmed
+## D2. Split criteria into filters and scoring
 
 **Decision:** Berlin, English and tech are filters (yes/no). A company that fails any of them is removed. Everything else is scored.
 
 **Why:** My first criteria were all yes/no. That gives a list, not a ranking. Filters decide who's in; the score decides the order.
 
-## D3. Measure team structure directly instead of company size (14 Oct 2026) · confirmed
+## D3. Measure team structure directly instead of company size 
 
 **Decision:** No size score. Instead, score whether the company already has someone in RevOps, GTM or Sales Ops.
 
 **Why:** Size is a weak proxy for what I care about, which is an existing team and processes to learn from. A small startup can have a strong RevOps lead; a large company can have none. So I measure the team directly.
 
-## D4. English as a working language: proxy (14 Oct 2026) · confirmed
+## D4. English as a working language:
 
 **Decision:** A company passes if its job postings are written in English.
 
@@ -41,7 +41,7 @@ Berlin-based, English-speaking, tech company. Employee size can be anything. Sec
 
 **Limitation:** Some companies post in English but run sales or client work in German. Tier A companies get a manual spot-check.
 
-## D5. Scoring signals and weights (14 Oct 2026) · confirmed
+## D5. Scoring signals and weights
 
 | Signal | Why it matters | Points |
 |---|---|---|
@@ -55,19 +55,7 @@ Berlin-based, English-speaking, tech company. Employee size can be anything. Sec
 
 Tiers: A = 70+, B = 50–69, C = below 50.
 
-## D6. One source: Clay company search (14 Oct 2026) · confirmed
-
-**Decision:** All companies come from Clay's company search.
-
-**Options I considered and dropped:**
-- Starting from a list of companies I'd collected by hand. Dropped because finding the companies is part of the skill this project should show.
-- Adding a second source (a public list of startups funded in 2026) and using my hand-picked list as a benchmark for sourcing quality. Dropped to keep the scope to one finished project. Both are listed under "What I'd do next".
-
-## D7. What goes public (14 Oct 2026) · confirmed
-
-**Decision:** Company-level data (names, scores, tiers) can be public. Anything about individual people (names, emails, LinkedIn profiles) stays in a private folder that never goes to GitHub.
-
-## D8. Narrowing the Clay search: headquarters in Berlin (14 Oct 2026) · confirmed
+## D6. Narrowing the Clay search: headquarters in Berlin
 
 **Starting point:** Clay search for Berlin + tech industries returned **10,904 companies**.
 
@@ -81,7 +69,7 @@ Tiers: A = 70+, B = 50–69, C = below 50.
 
 **After the fix:** **5,037 companies**, and the top results looked right: companies actually run from Berlin (e.g. n8n, N26, Parloa, Qdrant). Some noise remained (a savings bank, a recruitment agency tagged as software). The tech filter after enrichment will catch these.
 
-## D9. Startups only: 11–500 employees (14 Oct 2026) · confirmed
+## D7. Startups only: 11–500 employees
 
 **Update to D1:** I started with "size can be anything", but what I actually want is a startup or scale-up, not a large corporation. So size becomes a sourcing filter after all.
 
@@ -96,7 +84,7 @@ Tiers: A = 70+, B = 50–69, C = below 50.
 
 **Count:** 5,037 → **1,496 companies.**
 
-## D10. Sector keywords in the description (14 Oct 2026) · confirmed
+## D8. Sector keywords in the description
 
 **Decision:** Keep only companies whose description contains at least one of: B2B, SaaS, enterprise, businesses, fintech, payments, banking, finance.
 
@@ -110,7 +98,7 @@ Tiers: A = 70+, B = 50–69, C = below 50.
 
 **Sourcing funnel:** 10,904 (Berlin + tech) → 6,170 (first HQ attempt, logic bug) → 5,037 (HQ in Berlin) → 1,496 (11–500 employees) → 593 (sector keywords).
 
-## D11. Work within the 200-row table limit (14 Oct 2026) · confirmed
+## D9. Work within the 200-row table limit
 
 **What happened:** Importing the 593 companies into a Clay table stopped at 200. My Clay plan caps each table at 200 rows.
 
@@ -120,7 +108,7 @@ Tiers: A = 70+, B = 50–69, C = below 50.
 
 **Plan for enrichment:** Test every column on 10 rows before running all 200. Run the cheap signals first; only spend more (finding a contact person, tech stack) on companies that score well.
 
-## D12. Credit budget: free columns first (14 Oct 2026) · confirmed
+## D10. Credit budget: free columns first (14 Oct 2026) · confirmed
 
 **Constraint:** My Clay plan has about 180 credits. Enriching 200 companies across five signals would need far more.
 
@@ -131,7 +119,7 @@ Tiers: A = 70+, B = 50–69, C = below 50.
 
 Before each paid column I note Clay's cost per row and decide how many rows it can run on.
 
-## D13. Sector tag with a formula, not AI (14 Oct 2026) · confirmed
+## D11. Sector tag with a formula, not AI
 
 **Decision:** A free formula column tags each company by keywords in its description:
 - fintech, payment, banking, finance, financial → **Fintech**
@@ -155,7 +143,7 @@ Before each paid column I note Clay's cost per row and decide how many rows it c
 
 **Result after the fix:** On the same 11 rows, 10 are now tagged correctly. The one miss is MOIA (a mobility service), tagged B2B SaaS, which is the known weakness above.
 
-## D14. Funding: a free lookup instead of paid enrichment (14 Oct 2026) · confirmed
+## D12. Funding: a free lookup instead of paid enrichment
 
 **What I found:** Clay's "Latest Funding" waterfall costs ~6.4 credits per row. Single providers cost 3 (Intellizence, AI), 4 (Dealroom), 10 (Crunchbase) or 12 (CB Insights). Even the cheapest would need 600 credits for 200 companies; I have ~180.
 
@@ -176,7 +164,7 @@ Result: 137 Berlin companies with a known round between October 2025 and Septemb
 
 **What this means for scoring:** With 5% coverage, the 20-point funding signal will rarely score. It tells me "this company is on my list" more than "this company raised money". I'll keep the column and decide on its weight once all signals are in and I can see the score distribution.
 
-## D15. Hiring signal: Clay's job openings enrichment (14 Oct 2026) · confirmed
+## D13. Hiring signal: Clay's job openings enrichment
 
 **Options compared:**
 
@@ -214,7 +202,7 @@ Result: 137 Berlin companies with a known round between October 2025 and Septemb
 
 **Job language:** Of the 18 GTM openings, **17 have English titles and 1 has a German title**. The language check is a formula: a title containing typical German job words (e.g. Werkstudent, Vertrieb, Leiter, Mitarbeiter) counts as German; otherwise English. Companies without a GTM opening are "Unknown".
 
-## D16. "Has a RevOps/GTM person": Clay search plus a strict title check (14 Oct 2026) · confirmed
+## D14. "Has a RevOps/GTM person": Clay search plus a strict title check 
 
 **Setup:** Clay's "Find contacts at company" (0.5 credits per row), searching for RevOps, Revenue Operations, Sales Operations, GTM, Go-to-Market and Business Operations. Limit 1 person per company. Only the job title is added to the table, no names.
 
@@ -232,7 +220,7 @@ Result: 137 Berlin companies with a known round between October 2025 and Septemb
 
 **Credits:** This confirms Clay charges only when a result is found (0.5 per hit), not per row.
 
-## D17. Headcount growth signal (14 Oct 2026) · confirmed
+## D15. Headcount growth signal
 
 **Options compared:**
 
@@ -255,7 +243,7 @@ Result: 137 Berlin companies with a known round between October 2025 and Septemb
 
 **Full run (200 companies):** Headcount data found for **186 of 200 companies (93%)**. **67 companies** grew 10%+ over 12 months.
 
-## D18. Score and tiers (14 Oct 2026) · confirmed
+## D16. Score and tiers
 
 **Score (0–100):** Hiring GTM 25 + Has RevOps/GTM person 25 + Funded recently 20 + Growing 15 + Sector (Fintech or B2B SaaS 15, other 5).
 
@@ -282,7 +270,7 @@ Result: 137 Berlin companies with a known round between October 2025 and Septemb
 
 **Next:** Manual spot-check of the 12 Tier A companies (does each one look like a real fit, and do they really work in English, per D4).
 
-## D19. Spot-check of Tier A and two fixes (14 Oct 2026) · confirmed
+## D17. Spot-check of Tier A and two fixes
 
 **What I checked:** The 12 Tier A companies and all 18 hiring matches, by reading the actual job titles.
 
